@@ -14,23 +14,30 @@ class CommentBox extends Component {
     this.setState({ comment: event.target.value });
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({title: '', comment: ''});
+  }
 
   render() { 
     return ( 
       <div>
         <h1>Welcome to Single Page Project!</h1>
         <h2>Please, Enter a Subject with some description.</h2>
-        <form>
-          <label>Subject: </label>
+        <form onSubmit={ this.handleSubmit }>
+          <h4>Subject: </h4>
           <input
             onChange={ this.handleTitle }
             value={ this.state.title }
           />
-          <label> Description: </label>
+          <h4> Description: </h4>
           <textarea
             onChange={ this.handleComment }
             value={ this.state.comment }
           />
+          <div>
+            <button>Submit!</button>
+          </div>
         </form>
       </div>
     );
