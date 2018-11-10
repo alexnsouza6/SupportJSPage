@@ -24,7 +24,7 @@ class CommentBox extends Component {
       <div>
         <h1>Welcome to Single Page Project!</h1>
         <h2>Please, Enter a Subject with some description.</h2>
-        <form onSubmit={ this.handleSubmit }>
+        <form onSubmit={this.handleSubmit}>
           <h4>Subject: </h4>
           <input
             onChange={ this.handleTitle }
