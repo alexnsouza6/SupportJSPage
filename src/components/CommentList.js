@@ -10,14 +10,12 @@ class CommentList extends Component {
   }
 
   render() { 
-    
-    console.log(this.state.comments);
     return ( 
       <div className="container">
         <h4>See what has been posted!</h4> 
         <ul className="list-group">
           {
-            this.state.comments.map( (comment,id) => 
+            this.state.comments.map((comment,id) => 
               <li className="list-group-item" key={id}> 
                 <h5>
                   { comment.title } 
@@ -26,8 +24,7 @@ class CommentList extends Component {
                   { comment.body }
                 </p>
               </li>  
-            )
-          }
+          )}
         </ul>
       </div> 
     );
