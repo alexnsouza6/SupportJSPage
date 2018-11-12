@@ -1,18 +1,16 @@
-import React from 'react'
+import React from 'react';
 import { mount } from 'enzyme';
 import CommentBox from '../CommentBox';
 
 let component;
 
 beforeEach(() => {
-  component = mount(
-    <CommentBox />
-  );
+  component = mount(<CommentBox />);
 });
 
 afterEach(() => {
   component.unmount();
-})
+});
 
 it('has an input, textarea and a button', () => {
   expect(component.find('input').length).toEqual(1);
@@ -23,11 +21,10 @@ it('has an input, textarea and a button', () => {
 describe('when testing input', () => {
   beforeEach(() => {
     component.find('input').simulate('change', {
-      target: { value: 'typing something...' }
+      target: { value: 'typing something...' },
     });
-    
-    component.update();
 
+    component.update();
   });
 
   it('has an input that user can type in', () => {
@@ -39,17 +36,15 @@ describe('when testing input', () => {
     component.update();
     expect(component.find('input').prop('value')).toEqual('');
   });
-
 });
 
 describe('when testing textarea', () => {
   beforeEach(() => {
     component.find('textarea').simulate('change', {
-      target: { value: 'typing something...' }
+      target: { value: 'typing something...' },
     });
-    
-    component.update();
 
+    component.update();
   });
 
   it('has an input that user can type in', () => {
@@ -61,5 +56,4 @@ describe('when testing textarea', () => {
     component.update();
     expect(component.find('textarea').prop('value')).toEqual('');
   });
-
 });
