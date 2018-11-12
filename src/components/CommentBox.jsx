@@ -4,27 +4,32 @@ import { commentsRef } from '../config/firebase';
 
 class CommentBox extends Component {
   state = {
-    title: '',
-    body: '',
+    title: '' /* title of the post */,
+    body: '' /* Body of the comment */,
   };
 
   handleTitle = (event) => {
+    /* This method handles changes on comment title */
     this.setState({ title: event.target.value });
   };
 
   handleComment = (event) => {
+    /* This method handles changes on comment body */
     this.setState({ body: event.target.value });
   };
 
   handleSubmit = (event) => {
+    /* This method handles submit action for form and make validations before it occurs */
     const { title, body } = this.state;
     event.preventDefault();
 
     if (title && body) {
       commentsRef.add(this.state);
+    } else {
+      /* Third party lib that displays a errors if any field is w/ blank value */
+      NotificationManager.error('No Blank Messages Allowed', 'Pay Attention!', 3000);
     }
 
-    NotificationManager.error('No Blank Messages Allowed', 'Pay Attention!', 3000);
     this.setState({ title: '', body: '' });
   };
 

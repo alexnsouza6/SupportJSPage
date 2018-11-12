@@ -3,9 +3,12 @@ import { collectionData } from 'rxfire/firestore';
 import { commentsRef } from '../config/firebase';
 
 class CommentList extends Component {
-  state = { comments: [] };
+  state = { comments: [] }; /* comments refers to the array of comments that is loaded from db */
 
   componentDidMount() {
+    /* collectionData is a method from rxfire that works like a observable.
+       It fires whenever a new data is posted in db.
+    */
     collectionData(commentsRef, 'id').subscribe(comments => this.setState({ comments }));
   }
 
