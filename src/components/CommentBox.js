@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { saveComment } from '../actions/index';
+import { commentsRef } from '../config/firebase';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class CommentBox extends Component {
   state = { 
     title: '',
-    comment: '',
+    body: '',
   };  
 
   handleTitle = (event) => {
@@ -13,13 +13,14 @@ class CommentBox extends Component {
   }
 
   handleComment = (event) => {
-    this.setState({ comment: event.target.value });
+    this.setState({ body: event.target.value });
   }
 
   handleSubmit = (event) => {
+    const { title, body } = this.state;
     event.preventDefault();
-    this.props.saveComment(this.state);
-    this.setState({title: '', comment: ''});
+    title && body ? commentsRef.add(this.state) : NotificationManager.error('No Blank Messages Allowed', 'Pay Attention!', 3000);
+    this.setState({title: '', body: ''});
   }
 
   render() { 
@@ -38,16 +39,17 @@ class CommentBox extends Component {
             <textarea
               className="form-control"
               onChange={ this.handleComment }
-              value={ this.state.comment }
+              value={ this.state.body }
               />
           </div>
           <div>
-            <button className="btn btn-primary">Submit!</button>
+            <button className="btn btn-primary mb-4">Submit!</button>
           </div>
         </form>
+        <NotificationContainer/>
       </div>
     );
   }
 }
  
-export default connect(null, { saveComment })(CommentBox);
+export default CommentBox;
